@@ -8,5 +8,8 @@ module DeviseSecurityExtension
       DeviseSecurityExtension::Patches.apply
     end
 
+    initializer 'devise_security_extension.orm' do |config|
+      require "devise_security_extension/#{DeviseSecurityExtension.orm}"
+    end
   end
 end

@@ -9,6 +9,10 @@ class TestPasswordArchivable < ActiveSupport::TestCase
     Devise.password_archiving_count = 1
   end
 
+  test 'should be mongoid' do
+    refute_kind_of(ActiveRecord::Base, User.new)
+  end
+
   test 'should respect maximum attempts configuration' do
     user = User.new
     user.password = 'password1'
@@ -17,7 +21,7 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user.password = 'password1'
     user.password_confirmation = 'password1'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(Mongoid::Errors::Validations) { user.save! }
   end
 
   test 'the option should be dynamic during runtime' do
@@ -38,10 +42,10 @@ class TestPasswordArchivable < ActiveSupport::TestCase
 
     user.password = 'password2'
     user.password_confirmation = 'password2'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(Mongoid::Errors::Validations) { user.save! }
 
     user.password = 'password1'
     user.password_confirmation = 'password1'
-    assert_raises(ActiveRecord::RecordInvalid) { user.save! }
+    assert_raises(Mongoid::Errors::Validations) { user.save! }
   end
 end

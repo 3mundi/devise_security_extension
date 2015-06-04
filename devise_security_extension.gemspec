@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'devise', '>= 3.0.0', '< 4.0'
   s.add_development_dependency 'bundler', '>= 1.3.0', '< 2.0'
   s.add_development_dependency 'sqlite3', '~> 1.3.10'
+  s.add_development_dependency 'mongoid', '~> 4'
   s.add_development_dependency 'rubocop', '~> 0'
   s.add_development_dependency 'test-unit', '~> 3.0', '>= 3.0.0'
   s.add_development_dependency 'easy_captcha', '~> 0'

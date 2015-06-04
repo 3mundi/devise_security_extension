@@ -1,0 +1,2 @@
+require 'devise_security_extension/models/mongoid/old_password'
+require 'devise_security_extension/models/mongoid/security_question'

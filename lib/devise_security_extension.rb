@@ -1,11 +1,9 @@
-require 'active_record'
 require 'active_support/core_ext/integer'
 require 'active_support/ordered_hash'
 require 'active_support/concern'
 require 'devise'
 
 module Devise
-
   # Should the password expire (e.g 3.months)
   mattr_accessor :expire_password_after
   @@expire_password_after = 3.months
@@ -85,6 +83,10 @@ module DeviseSecurityExtension
   module Controllers
     autoload :Helpers, 'devise_security_extension/controllers/helpers'
   end
+
+  # Sets orm :mongoid or :active_record(default)
+  mattr_accessor :orm
+  @@orm = :active_record
 end
 
 # modules
@@ -100,8 +102,5 @@ Devise.add_module :paranoid_verification, controller: :paranoid_verification_cod
 # requires
 require 'devise_security_extension/routes'
 require 'devise_security_extension/rails'
-require 'devise_security_extension/orm/active_record'
-require 'devise_security_extension/models/old_password'
-require 'devise_security_extension/models/security_question'
 require 'devise_security_extension/models/database_authenticatable_patch'
 require 'devise_security_extension/models/paranoid_verification'
